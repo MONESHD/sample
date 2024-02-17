@@ -1,34 +1,31 @@
 pipeline {
-    agent {
-        label 'windows'
-    }
-    
+    agent any
     stages {
         stage('Checkout') {
             steps {
                 // Check out the code from your version control system (e.g., Git)
-                checkout scm
+                git branch: 'main', url: 'https://github.com/MONESHD/sample.git'
             }
         }
 
         stage('Build') {
             steps {
                 // Execute build commands specific to your project
-                bat 'msbuild.exe YourSolution.sln'
+                echo "Bulinding your project"
             }
         }
 
         stage('Test') {
             steps {
                 // Run tests using a testing framework
-                bat 'nunit-console.exe YourTests.dll'
+                echo "Testing your project"
             }
         }
 
         stage('Deploy') {
             steps {
                 // Perform deployment steps, if applicable
-                bat 'xcopy /Y /S source_directory destination_directory'
+                echo "Deploying your project"
             }
         }
     }
